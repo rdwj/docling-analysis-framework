@@ -16,7 +16,7 @@ except FileNotFoundError:
 
 setup(
     name="docling-analysis-framework",
-    version="1.0.0",
+    version="1.0.1",
     author="Wes Jackson",
     author_email="wjackson@redhat.com",
     description="AI-ready analysis framework for PDF and Office documents using Docling",

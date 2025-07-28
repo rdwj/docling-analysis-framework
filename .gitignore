@@ -15,6 +15,7 @@ CLAUDE.md
 build/
 develop-eggs/
 dist/
+.pypirc
 downloads/
 eggs/
 .eggs/
