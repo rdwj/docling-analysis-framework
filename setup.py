@@ -8,18 +8,15 @@ import os
 
 # Read the contents of README file
 this_directory = os.path.abspath(os.path.dirname(__file__))
-try:
-    with open(os.path.join(this_directory, 'README.md'), encoding='utf-8') as f:
-        long_description = f.read()
-except FileNotFoundError:
-    long_description = "AI-ready analysis framework for PDF and Office documents using Docling"
+with open(os.path.join(this_directory, 'README.md'), encoding='utf-8') as f:
+    long_description = f.read()
 
 setup(
     name="docling-analysis-framework",
     version="1.0.1",
     author="Wes Jackson",
     author_email="wjackson@redhat.com",
-    description="AI-ready analysis framework for PDF and Office documents using Docling",
+    description="AI-ready analysis framework for PDF and Office documents using Docling for content extraction",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/rdwj/docling-analysis-framework",
@@ -28,10 +25,15 @@ setup(
         "Source": "https://github.com/rdwj/docling-analysis-framework",
         "Documentation": "https://github.com/rdwj/docling-analysis-framework/blob/main/README.md",
     },
-    packages=find_packages(where="src"),
-    package_dir={"": "src"},
+    packages=[
+        "docling_analysis_framework",
+        "docling_analysis_framework.core", 
+        "docling_analysis_framework.handlers",
+        "docling_analysis_framework.utils"
+    ],
+    package_dir={"docling_analysis_framework": "src/docling_analysis_framework"},
     classifiers=[
-        "Development Status :: 4 - Beta",
+        "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
         "Topic :: Software Development :: Libraries :: Python Modules",
         "Topic :: Text Processing :: General",
@@ -43,7 +45,6 @@ setup(
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
-        "Programming Language :: Python :: 3.12",
     ],
     python_requires=">=3.8",
     install_requires=[
@@ -63,8 +64,8 @@ setup(
     },
     entry_points={
         "console_scripts": [
-            "docling-analyze=examples.basic_analysis:main",
-            "docling-analyze-enhanced=examples.enhanced_analysis:main",
+            "docling-analyze=src.docling_analysis_framework.examples.basic_analysis:main",
+            "docling-analyze-enhanced=src.docling_analysis_framework.examples.enhanced_analysis:main",
         ],
     },
     include_package_data=True,
