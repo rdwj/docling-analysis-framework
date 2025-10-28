@@ -196,7 +196,7 @@ for ext in safe_extensions:
 
 Stay informed about security updates:
 
-- Watch the [GitHub repository](https://github.com/redhat-ai-americas/docling-analysis-framework)
+- Watch the [GitHub repository](https://github.com/rdwj/docling-analysis-framework)
 - Monitor [Docling security advisories](https://github.com/DS4SD/docling)
 - Review release notes for security fixes
 - Subscribe to security notifications

@@ -3,7 +3,7 @@
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Docling Powered](https://img.shields.io/badge/Docling-Powered-blue.svg)](https://github.com/DS4SD/docling)
-[![AI Ready](https://img.shields.io/badge/AI%20Ready-✓-green.svg)](https://github.com/redhat-ai-americas/docling-analysis-framework)
+[![AI Ready](https://img.shields.io/badge/AI%20Ready-✓-green.svg)](https://github.com/rdwj/docling-analysis-framework)
 
 AI-ready analysis framework for **PDF and Office documents** using Docling for content extraction. Transforms Docling's output into optimized chunks and structured analysis for AI/ML pipelines.
 
@@ -37,6 +37,31 @@ daf.save_chunks_to_json(chunks, "chunks_output.json")
 # 💾 Save analysis to JSON  
 daf.save_analysis_to_json(result, "analysis_output.json")
 ```
+
+## 🔄 Unified Interface Support
+
+This framework now supports the unified interface standard, providing consistent access patterns across all analysis frameworks:
+
+```python
+import docling_analysis_framework as daf
+
+# Use the unified interface
+result = daf.analyze_unified("document.pdf")
+
+# All access patterns work consistently
+doc_type = result['document_type']        # Dict access ✓
+doc_type = result.document_type           # Attribute access ✓
+doc_type = result.get('document_type')    # get() method ✓
+as_dict = result.to_dict()                # Full dict conversion ✓
+
+# Works the same across all frameworks
+print(f"Framework: {result.framework}")   # 'docling-analysis-framework'
+print(f"Type: {result.document_type}")
+print(f"Confidence: {result.confidence}")
+print(f"AI opportunities: {result.ai_opportunities}")
+```
+
+The unified interface ensures compatibility when switching between frameworks or using multiple frameworks together.
 
 ### Advanced Usage
 
@@ -180,7 +205,7 @@ Both frameworks now provide identical API patterns and functionality!
 pip install docling
 
 # Install framework
-git clone https://github.com/redhat-ai-americas/docling-analysis-framework.git
+git clone https://github.com/rdwj/docling-analysis-framework.git
 cd docling-analysis-framework  
 pip install -e .
 ```

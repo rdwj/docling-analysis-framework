@@ -297,3 +297,33 @@ __all__ = [
     # Version
     '__version__'
 ]
+
+# Add unified interface support
+from .unified_interface import UnifiedAnalysisResult
+
+def analyze_unified(file_path: Union[str, Path], **kwargs):
+    """Analyze file and return unified result format.
+    
+    This provides a consistent interface across all analysis frameworks.
+    
+    Args:
+        file_path: Path to the file to analyze
+        **kwargs: Framework-specific parameters (not used in docling)
+        
+    Returns:
+        UnifiedAnalysisResult with consistent interface
+        
+    Example:
+        result = daf.analyze_unified("document.pdf")
+        doc_type = result['document_type']  # Dict access
+        doc_type = result.document_type     # Attribute access
+        as_dict = result.to_dict()          # Full conversion
+    """
+    analyzer = _get_analyzer()
+    return analyzer.analyze_unified(str(file_path), **kwargs)
+
+# Update __all__ to include unified interface
+__all__.extend([
+    'UnifiedAnalysisResult',
+    'analyze_unified'
+])

@@ -5,6 +5,21 @@ All notable changes to the Docling Analysis Framework will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2025-01-19
+
+### Added
+- **Unified Interface Support**
+  - New `analyze_unified()` method providing consistent interface across all analysis frameworks
+  - `UnifiedAnalysisResult` wrapper class for standardized access patterns
+  - Support for dictionary-style access: `result['document_type']`
+  - Support for attribute access: `result.document_type`
+  - Support for dict methods: `get()`, `keys()`, `values()`, `items()`
+  - Full compatibility with the unified interface standard
+
+### Changed
+- Updated README with unified interface documentation
+- Added unified interface exports to module `__all__`
+
 ## [1.0.0] - 2025-01-15
 
 ### 🎉 Initial Release

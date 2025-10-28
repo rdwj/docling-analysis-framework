@@ -509,6 +509,25 @@ class DoclingAnalyzer:
                 "processing_duration_seconds": processing_time
             }
 
+    def analyze_unified(self, file_path: str, **kwargs):
+        """Analyze document and return unified result format.
+        
+        This method provides a consistent interface across all analysis frameworks.
+        
+        Args:
+            file_path: Path to the file to analyze
+            **kwargs: Framework-specific parameters (not used in docling)
+            
+        Returns:
+            UnifiedAnalysisResult with consistent interface
+        """
+        # Import here to avoid circular imports
+        from ..unified_interface import UnifiedAnalysisResult
+        
+        # Call the existing analyze method
+        raw_result = self.analyze_document(file_path)
+        return UnifiedAnalysisResult(raw_result)
+
     def get_supported_formats(self) -> List[str]:
         """Get list of supported document formats"""
         return [".pdf", ".docx", ".pptx", ".xlsx", ".png", ".jpg", ".jpeg", ".tiff"]
