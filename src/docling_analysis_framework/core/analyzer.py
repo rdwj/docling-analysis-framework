@@ -14,6 +14,13 @@ from datetime import datetime
 import traceback
 
 try:
+    from analysis_framework_base import BaseAnalyzer
+    BASE_ANALYZER_AVAILABLE = True
+except ImportError:
+    BASE_ANALYZER_AVAILABLE = False
+    BaseAnalyzer = object  # Fallback for backward compatibility
+
+try:
     from docling.document_converter import DocumentConverter
     DOCLING_AVAILABLE = True
 except ImportError:
@@ -368,7 +375,7 @@ class GenericDoclingHandler(DoclingHandler):
         return data
 
 
-class DoclingAnalyzer:
+class DoclingAnalyzer(BaseAnalyzer):
     """Main document analysis engine using Docling"""
 
     def __init__(self, max_file_size_mb: Optional[float] = None):

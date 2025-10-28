@@ -29,7 +29,7 @@ from .core.chunking import (DoclingChunkingOrchestrator, DocumentChunk,
                             PageAwareChunkingStrategy)
 
 # Package version
-__version__ = "1.0.0"
+__version__ = "2.0.0"
 
 # Setup logging
 logging.basicConfig(level=logging.WARNING)

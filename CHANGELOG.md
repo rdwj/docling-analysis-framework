@@ -5,6 +5,27 @@ All notable changes to the Docling Analysis Framework will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] - 2025-10-27
+
+### Changed
+- **BREAKING**: Now depends on `analysis-framework-base>=1.0.0`
+- `UnifiedAnalysisResult` now inherits from base framework class
+- `DoclingAnalyzer` implements `BaseAnalyzer` interface
+- `DoclingChunkingOrchestrator` implements `BaseChunker` interface
+- `DocumentChunk` extends `BaseChunkInfo` from base framework
+- Part of unified analysis framework suite
+
+### Added
+- `DoclingChunkingOrchestrator.get_supported_strategies()` - returns list of chunking strategies
+- Integration with analysis-framework-base for consistent cross-framework interfaces
+- Framework suite documentation in README
+
+### Backward Compatibility
+- All existing APIs remain unchanged
+- Existing code will continue to work without modifications
+- New base classes only add interface consistency, no functionality changes
+- `analyze_unified()` method maintained from v1.1.0
+
 ## [1.1.0] - 2025-01-19
 
 ### Added

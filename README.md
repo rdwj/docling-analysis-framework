@@ -7,7 +7,23 @@
 
 AI-ready analysis framework for **PDF and Office documents** using Docling for content extraction. Transforms Docling's output into optimized chunks and structured analysis for AI/ML pipelines.
 
-> **📝 For text, code, and configuration files**, use our companion [document-analysis-framework](https://github.com/redhat-ai-americas/document-analysis-framework) which uses only Python standard library.
+## 🔗 Part of Analysis Framework Suite
+
+This framework is part of a unified suite of document analysis tools that share a consistent interface:
+
+- **[analysis-framework-base](https://pypi.org/project/analysis-framework-base/)** - Base interfaces and shared models
+- **[xml-analysis-framework](https://pypi.org/project/xml-analysis-framework/)** - XML document analysis
+- **[docling-analysis-framework](https://pypi.org/project/docling-analysis-framework/)** - PDF/Office documents via Docling (this package)
+- **[document-analysis-framework](https://pypi.org/project/document-analysis-framework/)** - Text, code, config files
+- **[data-analysis-framework](https://pypi.org/project/data-analysis-framework/)** - Structured data analysis
+
+All frameworks implement the same `BaseAnalyzer` and `BaseChunker` interfaces from `analysis-framework-base`, enabling:
+- **Consistent API** across document types
+- **Easy framework switching** with minimal code changes
+- **Unified result format** for downstream processing
+- **Shared tooling** and utilities
+
+> **📝 For text, code, and configuration files**, use our companion [document-analysis-framework](https://github.com/rdwj/document-analysis-framework) which uses only Python standard library.
 
 ## 🚀 Quick Start
 

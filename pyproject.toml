@@ -1,11 +1,11 @@
 [build-system]
-requires = ["setuptools>=45", "wheel", "setuptools_scm[toml]>=6.2"]
+requires = ["setuptools>=45", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "docling-analysis-framework"
-dynamic = ["version"]
-description = "AI-ready analysis framework for PDF and Office documents using Docling for content extraction"
+version = "2.0.0"
+description = "AI-ready analysis framework for PDF and Office documents using Docling for content extraction - part of the unified analysis framework suite"
 readme = "README.md"
 license = {text = "MIT"}
 authors = [
@@ -30,6 +30,7 @@ classifiers = [
 requires-python = ">=3.8"
 dependencies = [
     "docling>=1.0.0",  # Main dependency for document processing
+    "analysis-framework-base>=1.0.0",  # Unified framework interfaces
 ]
 
 [project.urls]
@@ -56,9 +57,6 @@ docling-analyze-enhanced = "docling_analysis_framework.examples.enhanced_analysi
 
 [tool.setuptools]
 package-dir = {"docling_analysis_framework" = "src/docling_analysis_framework"}
-
-[tool.setuptools_scm]
-write_to = "src/docling_analysis_framework/_version.py"
 
 [tool.black]
 line-length = 100

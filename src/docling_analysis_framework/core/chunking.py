@@ -8,7 +8,15 @@ import hashlib
 import logging
 from abc import ABC, abstractmethod
 from typing import List, Dict, Any, Optional
-from dataclasses import dataclass
+from dataclasses import dataclass, field
+
+try:
+    from analysis_framework_base import BaseChunker, BaseChunkInfo
+    BASE_CHUNKER_AVAILABLE = True
+except ImportError:
+    BASE_CHUNKER_AVAILABLE = False
+    BaseChunker = object  # Fallback for backward compatibility
+    BaseChunkInfo = object  # Fallback for backward compatibility
 
 logger = logging.getLogger(__name__)
 
@@ -30,16 +38,29 @@ class ChunkingConfig:
             raise ValueError("overlap_size must be less than max_chunk_size")
 
 
-@dataclass
-class DocumentChunk:
-    """Represents a chunk of document content"""
-    chunk_id: str
-    content: str
-    chunk_type: str
-    metadata: Dict[str, Any]
-    start_position: Optional[int] = None
-    end_position: Optional[int] = None
-    token_count: Optional[int] = None
+if BASE_CHUNKER_AVAILABLE:
+    @dataclass
+    class DocumentChunk(BaseChunkInfo):
+        """Represents a chunk of document content"""
+        chunk_type: str = ""
+        start_position: Optional[int] = None
+        end_position: Optional[int] = None
+
+        def __post_init__(self):
+            """Ensure required fields from BaseChunkInfo are set"""
+            # BaseChunkInfo provides: chunk_id, content, metadata, token_count
+            pass
+else:
+    @dataclass
+    class DocumentChunk:
+        """Represents a chunk of document content (standalone fallback)"""
+        chunk_id: str
+        content: str
+        chunk_type: str
+        metadata: Dict[str, Any]
+        start_position: Optional[int] = None
+        end_position: Optional[int] = None
+        token_count: Optional[int] = None
 
 
 class DoclingChunkingStrategy(ABC):
@@ -420,7 +441,7 @@ class PageAwareChunkingStrategy(DoclingChunkingStrategy):
         return chunks
 
 
-class DoclingChunkingOrchestrator:
+class DoclingChunkingOrchestrator(BaseChunker):
     """Orchestrates different chunking strategies for Docling-processed documents"""
 
     def __init__(self, max_file_size_mb: Optional[float] = None,
@@ -542,3 +563,11 @@ class DoclingChunkingOrchestrator:
                 chunk_type="error",
                 metadata={"error": str(e), "file_path": file_path}
             )]
+
+    def get_supported_strategies(self) -> List[str]:
+        """Get list of supported chunking strategies
+
+        Returns:
+            List of strategy names that can be used with chunk_document()
+        """
+        return ['structural', 'table_aware', 'page_aware', 'auto']
